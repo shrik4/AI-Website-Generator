@@ -65,9 +65,8 @@ export default function Home() {
   const { data: generationStatus } = useQuery<GenerationStatus>({
     queryKey: ["/api/generation", generationId],
     enabled: !!generationId,
-    refetchInterval: (data) => {
-      return (data as GenerationStatus)?.status === "generating" ? 2000 : false;
-    },
+    refetchInterval: 2000,
+    refetchIntervalInBackground: false,
   });
 
   const handleGenerate = () => {

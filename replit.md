@@ -2,6 +2,9 @@
 
 This is a full-stack AI Website Generator application built with React, Express, and TypeScript. The app allows users to generate complete websites (frontend + backend code) using multiple AI providers like OpenAI, Google Gemini, Anthropic Claude, and OpenRouter. Users can describe their website requirements in natural language, and the AI generates both HTML/CSS/JavaScript frontend code and Python FastAPI backend code, which can be downloaded as a ZIP file.
 
+**Status**: Fully functional application running on port 5000
+**Last Updated**: January 31, 2025 - Fixed all TypeScript errors, added user-entered API key support
+
 # User Preferences
 
 Preferred communication style: Simple, everyday language.
