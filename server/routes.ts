@@ -80,11 +80,51 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Download page for source code
+  app.get("/download", (req, res) => {
+    res.send(`
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>Download AI Website Generator Source Code</title>
+        <style>
+          body { font-family: Arial, sans-serif; max-width: 600px; margin: 50px auto; padding: 20px; }
+          .download-btn { background: #3b82f6; color: white; padding: 15px 30px; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; text-decoration: none; display: inline-block; }
+          .download-btn:hover { background: #2563eb; }
+          .info { background: #f3f4f6; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        </style>
+      </head>
+      <body>
+        <h1>AI Website Generator - Source Code</h1>
+        <div class="info">
+          <h3>Complete source code package ready for download</h3>
+          <p><strong>File size:</strong> 234 KB</p>
+          <p><strong>Includes:</strong> All TypeScript/React frontend, Express.js backend, configuration files, and setup instructions</p>
+        </div>
+        
+        <a href="/api/download-source" class="download-btn">Download Source Code ZIP</a>
+        
+        <div class="info">
+          <h3>Setup Instructions:</h3>
+          <ol>
+            <li>Extract the ZIP file</li>
+            <li>Run <code>npm install</code></li>
+            <li>Run <code>npm run dev</code></li>
+            <li>Open http://localhost:5000</li>
+          </ol>
+          <p>Get API keys from your chosen provider: OpenAI, Google Gemini, Anthropic Claude, or OpenRouter</p>
+        </div>
+      </body>
+      </html>
+    `);
+  });
+
   // Download source code ZIP
   app.get("/api/download-source", (req, res) => {
     try {
       const fs = require('fs');
-      const zipPath = 'ai-website-generator-source.zip';
+      const path = require('path');
+      const zipPath = path.resolve('./ai-website-generator-source.zip');
       
       if (!fs.existsSync(zipPath)) {
         res.status(404).json({ message: "Source package not found" });
@@ -95,8 +135,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       res.setHeader('Content-Type', 'application/zip');
       res.setHeader('Content-Disposition', 'attachment; filename="ai-website-generator-source.zip"');
-      res.send(zipBuffer);
+      res.setHeader('Content-Length', zipBuffer.length);
+      res.setHeader('Cache-Control', 'no-cache');
+      res.end(zipBuffer);
     } catch (error) {
+      console.error('Download error:', error);
       res.status(500).json({ message: error instanceof Error ? error.message : "Unknown error" });
     }
   });
