@@ -80,6 +80,27 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Download source code ZIP
+  app.get("/api/download-source", (req, res) => {
+    try {
+      const fs = require('fs');
+      const zipPath = 'ai-website-generator-source.zip';
+      
+      if (!fs.existsSync(zipPath)) {
+        res.status(404).json({ message: "Source package not found" });
+        return;
+      }
+
+      const zipBuffer = fs.readFileSync(zipPath);
+      
+      res.setHeader('Content-Type', 'application/zip');
+      res.setHeader('Content-Disposition', 'attachment; filename="ai-website-generator-source.zip"');
+      res.send(zipBuffer);
+    } catch (error) {
+      res.status(500).json({ message: error instanceof Error ? error.message : "Unknown error" });
+    }
+  });
+
   // Get available models for each provider
   app.get("/api/models", (req, res) => {
     const models = {
