@@ -33,7 +33,7 @@ Visit the live demo: [AI Website Generator](https://your-deployment-url.com)
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/ai-website-generator.git
+   git clone https://github.com/shrik4/AI-Website-Generator.git
    cd ai-website-generator
    ```
 
