@@ -15,13 +15,17 @@ export default function Header() {
             </div>
           </div>
           <div className="flex items-center space-x-4">
-            <Button variant="ghost" size="sm" className="text-gray-500 hover:text-gray-700">
-              <Github className="w-5 h-5" />
-            </Button>
-            <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90 flex items-center space-x-2">
-              <Star className="w-4 h-4" />
-              <span>Star on GitHub</span>
-            </Button>
+            <a href="https://github.com/shrik4/" target="_blank" rel="noreferrer">
+              <Button variant="ghost" size="sm" className="text-gray-500 hover:text-gray-700">
+                <Github className="w-5 h-5" />
+              </Button>
+            </a>
+            <a href="https://github.com/shrik4/AI-Website-Generator.git" target="_blank" rel="noreferrer">
+              <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90 flex items-center space-x-2">
+                <Star className="w-4 h-4" />
+                <span>Star on GitHub</span>
+              </Button>
+            </a>
           </div>
         </div>
       </div>
